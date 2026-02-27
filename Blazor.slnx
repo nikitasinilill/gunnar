@@ -8,5 +8,9 @@
     <Project Path="Code/Shared/Shared.csproj" />
   </Folder>
   <Folder Name="/Soft/" />
+  <Folder Name="/Soft/Movie/">
+    <Project Path="Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj" />
+    <Project Path="Soft/Abc.Soft.Web/Abc.Soft.Web/Abc.Soft.Web.csproj" />
+  </Folder>
   <Folder Name="/Tests/" />
 </Solution>
