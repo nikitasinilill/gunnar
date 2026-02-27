@@ -2075,9 +2075,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Movie.Client.csproj",
+      "projectUniqueName": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Todo.Client.csproj",
       "projectName": "Abc.Soft.Web.Client",
-      "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Movie.Client.csproj",
+      "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Todo.Client.csproj",
       "packagesPath": "/Users/qise/.nuget/packages/",
       "outputPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/obj/",
       "projectStyle": "PackageReference",

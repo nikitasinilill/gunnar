@@ -12,5 +12,9 @@
     <Project Path="Soft/Movie/Client/Movie.Client.csproj" />
     <Project Path="Soft/Movie/Server/Movie.csproj" />
   </Folder>
+  <Folder Name="/Soft/Todo/">
+    <Project Path="Soft/Todo/Client/Todo.Client.csproj" />
+    <Project Path="Soft/Todo/Server/Todo.csproj" />
+  </Folder>
   <Folder Name="/Tests/" />
 </Solution>
