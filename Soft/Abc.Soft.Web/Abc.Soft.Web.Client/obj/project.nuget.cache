@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "InHR3cT9qFI=",
+  "dgSpecHash": "rooSTVsse/s=",
   "success": true,
-  "projectFilePath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj",
+  "projectFilePath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Movie.Client.csproj",
   "expectedPackageFiles": [
     "/Users/qise/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.2/microsoft.aspnetcore.app.internal.assets.10.0.2.nupkg.sha512",
     "/Users/qise/.nuget/packages/microsoft.aspnetcore.authorization/10.0.2/microsoft.aspnetcore.authorization.10.0.2.nupkg.sha512",

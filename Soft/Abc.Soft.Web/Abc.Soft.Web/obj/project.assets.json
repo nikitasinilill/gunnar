@@ -2733,8 +2733,8 @@
     },
     "Abc.Soft.Web.Client/1.0.0": {
       "type": "project",
-      "path": "../Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj",
-      "msbuildProject": "../Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj"
+      "path": "../Abc.Soft.Web.Client/Movie.Client.csproj",
+      "msbuildProject": "../Abc.Soft.Web.Client/Movie.Client.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2754,9 +2754,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web/Abc.Soft.Web.csproj",
+      "projectUniqueName": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web/Movie.csproj",
       "projectName": "Abc.Soft.Web",
-      "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web/Abc.Soft.Web.csproj",
+      "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web/Movie.csproj",
       "packagesPath": "/Users/qise/.nuget/packages/",
       "outputPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web/obj/",
       "projectStyle": "PackageReference",
@@ -2774,8 +2774,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj": {
-              "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj"
+            "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Movie.Client.csproj": {
+              "projectPath": "/Users/qise/ISA2/Blasor/Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Movie.Client.csproj"
             }
           }
         }

@@ -9,8 +9,8 @@
   </Folder>
   <Folder Name="/Soft/" />
   <Folder Name="/Soft/Movie/">
-    <Project Path="Soft/Abc.Soft.Web/Abc.Soft.Web.Client/Abc.Soft.Web.Client.csproj" />
-    <Project Path="Soft/Abc.Soft.Web/Abc.Soft.Web/Abc.Soft.Web.csproj" />
+    <Project Path="Soft/Movie/Client/Movie.Client.csproj" />
+    <Project Path="Soft/Movie/Server/Movie.csproj" />
   </Folder>
   <Folder Name="/Tests/" />
 </Solution>
