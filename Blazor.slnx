@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Code/">
+    <Project Path="Code/Aids/Aids.csproj" />
+    <Project Path="Code/Data/Data.csproj" />
+    <Project Path="Code/Domain/Domain.csproj" />
+    <Project Path="Code/Infra/Infra.csproj" />
+    <Project Path="Code/Jobs/Jobs.csproj" />
+    <Project Path="Code/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Soft/" />
+  <Folder Name="/Tests/" />
+</Solution>
