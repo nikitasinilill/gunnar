@@ -1,9 +1,10 @@
 @page "/movies"
+@using Abc.Soft.Web.Data
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using Microsoft.EntityFrameworkCore
 @using Abc.Soft.Web.Model
 @implements IAsyncDisposable
-@inject IDbContextFactory<MovieDbContext> DbFactory
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject NavigationManager NavigationManager
 
 <PageTitle>Index</PageTitle>
@@ -28,7 +29,7 @@
 </QuickGrid>
 
 @code {
-    private MovieDbContext context = default!;
+    private ApplicationDbContext context = default!;
 
     protected override void OnInitialized()
     {

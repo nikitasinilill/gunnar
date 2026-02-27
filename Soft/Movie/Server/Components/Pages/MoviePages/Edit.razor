@@ -1,7 +1,8 @@
 @page "/movies/edit"
+@using Abc.Soft.Web.Data
 @using Microsoft.EntityFrameworkCore
 @using Abc.Soft.Web.Model
-@inject IDbContextFactory<MovieDbContext> DbFactory
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject NavigationManager NavigationManager
 
 <PageTitle>Edit</PageTitle>
