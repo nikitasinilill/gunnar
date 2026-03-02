@@ -12,17 +12,13 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <MyNavLink Href="movies" IconClass="bi-plus-square-fill-nav-menu" Text="Movies"></MyNavLink>
-        <MyNavLink Href="counter" IconClass="bi-plus-square-fill-nav-menu" Text="Counter"></MyNavLink>
-        <MyNavLink Href="auth" IconClass="bi-lock-nav-menu" Text="Auth Required"></MyNavLink>
+        <MyNavLink Href="" Match="NavLinkMatch.All" IconClass="bi-home-icon" Text="Home"></MyNavLink>
+        <MyNavLink Href="movies" IconClass="bi-counter-icon" Text="Movies"></MyNavLink>
+        <MyNavLink Href="counter" IconClass="bi-counter-icon" Text="Counter"></MyNavLink>
+        <MyNavLink Href="auth" IconClass="bi-lock-icon" Text="Auth Required"></MyNavLink>
         <AuthorizeView>
             <Authorized>
-                <MyNavLink Href="Account/Manage" IconClass="bi-lock-nav-menu" Text="@context.User.Identity?.Name"></MyNavLink>
+                <MyNavLink Href="Account/Manage" IconClass="bi-person-icon" Text="@context.User.Identity?.Name"></MyNavLink>
                 <div class="nav-item px-3">
                     <form action="Account/Logout" method="post">
                         <AntiforgeryToken/>
@@ -34,8 +30,8 @@
                 </div>
             </Authorized>
             <NotAuthorized>
-                <MyNavLink Href="Account/Manage" IconClass="bi-lock-nav-menu" Text="Register"></MyNavLink>
-                <MyNavLink Href="Account/Login" IconClass="bi-lock-nav-menu" Text="Login"></MyNavLink>
+                <MyNavLink Href="Account/Manage" IconClass="bi-register-icon" Text="Register"></MyNavLink>
+                <MyNavLink Href="Account/Login" IconClass="bi-login-icon" Text="Login"></MyNavLink>
             </NotAuthorized>
         </AuthorizeView>
     </nav>

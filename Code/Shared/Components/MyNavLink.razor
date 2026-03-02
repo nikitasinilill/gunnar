@@ -1,5 +1,5 @@
 ﻿<div class="nav-item px-3">
-    <NavLink class="nav-link" href="@Href">
+    <NavLink class="nav-link" href="@Href" Match="@Match">
         <span class="bi @IconClass" aria-hidden="true"></span> @Text
     </NavLink>
 </div>
@@ -8,4 +8,5 @@
     [Parameter] public string Href { get; set; } = string.Empty;
     [Parameter] public string Text { get; set; } = string.Empty;
     [Parameter] public string IconClass { get; set; } = string.Empty;
+    [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
 }
