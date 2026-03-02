@@ -29,8 +29,6 @@
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/scopedcss/bundle/Abc.Shared.styles.css
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/scopedcss/projectbundle/Abc.Shared.bundle.scp.css
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/compressed/j4rr02ik7x-{0}-luzdqbu196-luzdqbu196.gz
-/Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/compressed/kmdzzlrzqm-{0}-2x7ge247om-2x7ge247om.gz
-/Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/compressed/kk8z6b8yqy-{0}-2x7ge247om-2x7ge247om.gz
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/staticwebassets.build.json
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/staticwebassets.build.json.cache
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/staticwebassets.development.json
@@ -47,3 +45,5 @@
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/refint/Abc.Shared.dll
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/Abc.Shared.pdb
 /Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/ref/Abc.Shared.dll
+/Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/compressed/kmdzzlrzqm-{0}-34bvk0peha-34bvk0peha.gz
+/Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/compressed/kk8z6b8yqy-{0}-34bvk0peha-34bvk0peha.gz
