@@ -10,9 +10,9 @@
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.AssemblyInfoInputs.cache
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.AssemblyInfo.cs
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.csproj.CoreCompileInputs.cache
+/Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.sourcelink.json
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.csproj.Up2Date
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Abc.Domain.dll
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/refint/Abc.Domain.dll
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Abc.Domain.pdb
 /Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/ref/Abc.Domain.dll
-/Users/qise/ISA2/Blasor/Code/Domain/obj/Debug/net10.0/Domain.sourcelink.json
