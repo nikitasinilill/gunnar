@@ -1301,8 +1301,8 @@
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_EFIGS.tptq2av103.dat
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.a41izow5az.wasm
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.s7nr322lzu.pdb
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.r81r1pn386.wasm
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.puyr00jndz.pdb
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/dotnet.js
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/blazor.webassembly.js.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Microsoft.AspNetCore.Authorization.1l4onz0xjo.wasm.gz
@@ -1514,8 +1514,8 @@
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_EFIGS.tptq2av103.dat.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat.gz
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.a41izow5az.wasm.gz
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.s7nr322lzu.pdb.gz
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.r81r1pn386.wasm.gz
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/Abc.Soft.Web.Client.puyr00jndz.pdb.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/wwwroot/_framework/dotnet.js.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/Abc.Soft.Web.Client.staticwebassets.runtime.json
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/bin/Debug/net10.0/Abc.Soft.Web.Client.staticwebassets.endpoints.json
@@ -2169,9 +2169,9 @@
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/64m8o0j9p1-{0}-tjcz0u77k5-tjcz0u77k5.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/3fa8ltofhr-{0}-tptq2av103-tptq2av103.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/f4mj5r6gsu-{0}-lfu7j35m59-lfu7j35m59.gz
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/zobyftkwxq-{0}-a41izow5az-a41izow5az.gz
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/9x1rw4usig-{0}-s7nr322lzu-s7nr322lzu.gz
-/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/ci2rkmt6e1-{0}-619hdoxlun-619hdoxlun.gz
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/zobyftkwxq-{0}-r81r1pn386-r81r1pn386.gz
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/9x1rw4usig-{0}-puyr00jndz-puyr00jndz.gz
+/Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/compressed/ci2rkmt6e1-{0}-yedvj8zwyw-yedvj8zwyw.gz
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/staticwebassets.build.json
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/staticwebassets.build.json.cache
 /Users/qise/ISA2/Blasor/Soft/Movie/Client/obj/Debug/net10.0/staticwebassets.development.json
