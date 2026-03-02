@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/qise/ISA2/Blasor/Code/Shared/obj/Debug/net10.0/scopedcss/projectbundle/Abc.Shared.bundle.scp.css",
+      "PackagePath": "staticwebassets/Abc.Shared.f3j2my1bm9.bundle.scp.css"
+    },
+    {
       "Id": "/Users/qise/ISA2/Blasor/Code/Shared/wwwroot/background.png",
       "PackagePath": "staticwebassets/background.png"
     },

@@ -17,40 +17,16 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="movies">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Movies
-            </NavLink>
-        </div>
-
-        
-
-        <MyNavLink Href="counter" IconClass="bi bi-plus-square-fill-nav-menu" Text="Counter"></MyNavLink>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
-
+        <MyNavLink Href="movies" IconClass="bi-plus-square-fill-nav-menu" Text="Movies"></MyNavLink>
+        <MyNavLink Href="counter" IconClass="bi-plus-square-fill-nav-menu" Text="Counter"></MyNavLink>
+        <MyNavLink Href="auth" IconClass="bi-lock-nav-menu" Text="Auth Required"></MyNavLink>
         <AuthorizeView>
             <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
-                    </NavLink>
-                </div>
+                <MyNavLink Href="Account/Manage" IconClass="bi-lock-nav-menu" Text="@context.User.Identity?.Name"></MyNavLink>
                 <div class="nav-item px-3">
                     <form action="Account/Logout" method="post">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                        <AntiforgeryToken/>
+                        <input type="hidden" name="ReturnUrl" value="@currentUrl"/>
                         <button type="submit" class="nav-link">
                             <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
                         </button>
@@ -58,16 +34,8 @@
                 </div>
             </Authorized>
             <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
+                <MyNavLink Href="Account/Manage" IconClass="bi-lock-nav-menu" Text="Register"></MyNavLink>
+                <MyNavLink Href="Account/Login" IconClass="bi-lock-nav-menu" Text="Login"></MyNavLink>
             </NotAuthorized>
         </AuthorizeView>
     </nav>
