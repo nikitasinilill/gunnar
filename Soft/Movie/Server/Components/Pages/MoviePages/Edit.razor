@@ -24,26 +24,10 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
                 <input type="hidden" name="Movie.Id" value="@Movie.Id" />
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title:</label>
-                    <InputText id="title" @bind-Value="Movie.Title" class="form-control" />
-                    <ValidationMessage For="() => Movie.Title" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="releasedate" class="form-label">ReleaseDate:</label>
-                    <InputDate id="releasedate" @bind-Value="Movie.ReleaseDate" class="form-control" />
-                    <ValidationMessage For="() => Movie.ReleaseDate" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="genre" class="form-label">Genre:</label>
-                    <InputText id="genre" @bind-Value="Movie.Genre" class="form-control" />
-                    <ValidationMessage For="() => Movie.Genre" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price:</label>
-                    <InputNumber id="price" @bind-Value="Movie.Price" class="form-control" />
-                    <ValidationMessage For="() => Movie.Price" class="text-danger" />
-                </div>
+                <MyEditItem TValue="string" Id="title" Label="Title" @bind-Value="Movie.Title" />
+                <MyEditItem TValue="DateOnly" Id="releaseDate" Label="Release Date" @bind-Value="Movie.ReleaseDate" />
+                <MyEditItem TValue="string" Id="genre" Label="Genre" @bind-Value="Movie.Genre" />
+                <MyEditItem TValue="decimal" Id="price" Label="Price" @bind-Value="Movie.Price" />
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
