@@ -18,5 +18,6 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/Aids/Aids.csproj" />
+    <Project Path="Tests/Data/Data.csproj" />
   </Folder>
 </Solution>
