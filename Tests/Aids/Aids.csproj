@@ -9,9 +9,9 @@
 	  <RootNamespace>Abc.Tests.Aids</RootNamespace>
 	  <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Code\Aids\Aids.csproj" />
+    <ProjectReference Include="..\..\Code\Data\Data.csproj" />
   </ItemGroup>
 
 </Project>
