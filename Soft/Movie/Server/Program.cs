@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Abc.Soft.Web.Client.Pages;
 using Abc.Soft.Web.Components;
 using Abc.Soft.Web.Components.Account;
-using Abc.Soft.Web.Data;
+using Abc.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -701,6 +701,9 @@
             "projectReferences": {
               "/Users/qise/ISA2/Blasor/Code/Aids/Aids.csproj": {
                 "projectPath": "/Users/qise/ISA2/Blasor/Code/Aids/Aids.csproj"
+              },
+              "/Users/qise/ISA2/Blasor/Code/Data/Data.csproj": {
+                "projectPath": "/Users/qise/ISA2/Blasor/Code/Data/Data.csproj"
               }
             }
           }
