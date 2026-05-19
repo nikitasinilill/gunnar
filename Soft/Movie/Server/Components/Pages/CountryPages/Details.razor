@@ -1,0 +1,34 @@
+@page "/countries/details"
+@attribute [ExcludeFromInteractiveRouting]
+@using Abc.Infra
+@using Abc.Data
+@inject ICountriesRepo repo
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details Country</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Country</h2>
+    <hr />
+    @if (country is null) {
+        <p><em>Loading...</em></p>
+    } else {
+        <MyEntityViewer Entity="country" />
+        <div>
+            <a href="@($"/countries/edit?id={country.Id}")">Edit</a> |
+            <a href="/countries">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Country country;
+    [SupplyParameterFromQuery] private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync() {
+        country = await repo.GetAsync(Id);
+        if (country is null) NavigationManager.NotFound();
+    }
+}
