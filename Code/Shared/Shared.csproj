@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Abc.Shared</AssemblyName>
+    <RootNamespace>Abc.Shared</RootNamespace>
+    <PlatformTarget>AnyCPU</PlatformTarget> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.*" />
+    <ProjectReference Include="..\Jobs\Jobs.csproj" />
+  </ItemGroup>
+
+</Project>

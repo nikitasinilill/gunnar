@@ -1,0 +1,11 @@
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/bin/Debug/net10.0/Abc.Aids.deps.json
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/bin/Debug/net10.0/Abc.Aids.dll
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/bin/Debug/net10.0/Abc.Aids.pdb
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Aids.GeneratedMSBuildEditorConfig.editorconfig
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Aids.AssemblyInfoInputs.cache
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Aids.AssemblyInfo.cs
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Aids.csproj.CoreCompileInputs.cache
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Abc.Aids.dll
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/refint/Abc.Aids.dll
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/Abc.Aids.pdb
+/Users/qise/Desktop/gunnar-main 2/Code/Aids/obj/Debug/net10.0/ref/Abc.Aids.dll

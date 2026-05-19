@@ -1,0 +1,47 @@
+@page "/movies/create"
+@attribute [ExcludeFromInteractiveRouting]
+@using Abc.Soft.Web.Data
+@using Microsoft.EntityFrameworkCore
+@using Abc.Data
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Movie</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Movie" OnValidSubmit="AddMovie" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <MyPropertyEditor TValue="string" Id="title" Label="Title:" @bind-Value="Movie.Title" />
+            <MyPropertyEditor TValue="DateOnly" Id="releasedate" Label="ReleaseDate:" @bind-Value="Movie.ReleaseDate" />
+            <MyPropertyEditor TValue="string" Id="genre" Label="Genre:" @bind-Value="Movie.Genre" />
+            <MyPropertyEditor TValue="decimal" Id="price" Label="Price:" @bind-Value="Movie.Price" />
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/movies">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Movie Movie { get; set; } = default!;
+
+    protected override void OnInitialized() => Movie ??= new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Movie.Add(Movie);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/movies");
+    }
+}

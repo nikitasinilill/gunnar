@@ -1,0 +1,30 @@
+<Solution>
+  <Folder Name="/Code/">
+    <Project Path="Code/Aids/Aids.csproj" />
+    <Project Path="Code/Data/Data.csproj" />
+    <Project Path="Code/Domain/Domain.csproj" />
+    <Project Path="Code/Infra/Infra.csproj" />
+    <Project Path="Code/Jobs/Jobs.csproj" />
+    <Project Path="Code/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Soft/" />
+  <Folder Name="/Soft/App/" />
+  <Folder Name="/Soft/Maui/" />
+  <Folder Name="/Soft/Blazor/">
+    <Project Path="Soft/Blazor/Client/Blazor.Client.csproj" />
+    <Project Path="Soft/Blazor/Server/Blazor.csproj" />
+  </Folder>
+  <Folder Name="/Soft/Todo/">
+    <Project Path="Soft/Todo/Client/Todo.Client.csproj" />
+    <Project Path="Soft/Todo/Server/Todo.csproj" />
+  </Folder>
+  <Folder Name="/Soft/Movie/">
+    <Project Path="Soft/Movie/Client/Movie.Client.csproj" />
+    <Project Path="Soft/Movie/Server/Movie.csproj" />
+  </Folder>
+  <Folder Name="/Soft/Web/" />
+  <Folder Name="/Tests/">
+    <Project Path="Tests/Aids/Aids.csproj" />
+    <Project Path="Tests/Data/Data.csproj" />
+  </Folder>
+</Solution>
