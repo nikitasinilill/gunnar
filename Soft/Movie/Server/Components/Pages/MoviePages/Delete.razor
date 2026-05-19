@@ -29,15 +29,15 @@
 
 @code {
     private Movie movie;
-    [SupplyParameterFromQuery] private int Id { get; set; }
+    [SupplyParameterFromQuery] private Guid Id { get; set; }
     protected override async Task OnInitializedAsync() {
         using var context = DbFactory.CreateDbContext();
-        movie = await context.Movie.FirstOrDefaultAsync(m => m.Id == Id);
+        movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == Id);
         if (movie is null) NavigationManager.NotFound();
     }
     private async Task DeleteMovie() {
         using var context = DbFactory.CreateDbContext();
-        context.Movie.Remove(movie!);
+        context.Movies.Remove(movie!);
         await context.SaveChangesAsync();
         NavigationManager.NavigateTo("/movies");
     }
