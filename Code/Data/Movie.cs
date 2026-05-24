@@ -11,4 +11,6 @@ public class Movie : NamedEntity {
     public string Genre { get; set; }
     [DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
     public decimal Price { get; set; }
+    public Money Money { get; set; }
+    public Country Country { get; set; }
 }
