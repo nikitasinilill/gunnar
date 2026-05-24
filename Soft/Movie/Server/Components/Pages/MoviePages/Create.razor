@@ -17,10 +17,7 @@
         <EditForm method="post" Model="Movie" OnValidSubmit="AddMovie" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
-            <MyPropertyEditor TValue="string" Id="title" Label="Title:" @bind-Value="Movie.Name" />
-            <MyPropertyEditor TValue="DateTime?" Id="releasedate" Label="ReleaseDate:" @bind-Value="Movie.ValidFrom" />
-            <MyPropertyEditor TValue="string" Id="genre" Label="Genre:" @bind-Value="Movie.Genre" />
-            <MyPropertyEditor TValue="decimal" Id="price" Label="Price:" @bind-Value="Movie.Price" />
+            <MyEntityEditor Entity="Movie" />
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

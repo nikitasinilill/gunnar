@@ -1,44 +1,24 @@
 @page "/movies/delete"
 @attribute [ExcludeFromInteractiveRouting]
 @using Abc.Infra
-@using Microsoft.EntityFrameworkCore
 @using Abc.Data
-@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject IMoviesRepo repo
 @inject NavigationManager NavigationManager
 
-<PageTitle>Delete</PageTitle>
-
-<h1>Delete</h1>
-
-<p>Are you sure you want to delete this?</p>
-<div>
-    <h2>Movie</h2>
-    <hr />
-    @if (movie is null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else {
-        <MyEntityViewer Entity="movie" />
-        <EditForm method="post" Model="movie" OnValidSubmit="DeleteMovie" FormName="delete" Enhance>
-            <button type="submit" class="btn btn-danger" disabled="@(movie is null)">Delete</button> |
-            <a href="/movies">Back to List</a>
-        </EditForm>
-    }
-</div>
+<MyDeletePage PageTitleText="Delete Movie" EntityTitle="Movie" Entity="movie" BasePath="/movies" OnValidSubmit="DeleteMovie" />
 
 @code {
-    private Movie movie;
+    private Movie? movie;
+
     [SupplyParameterFromQuery] private Guid Id { get; set; }
+
     protected override async Task OnInitializedAsync() {
-        using var context = DbFactory.CreateDbContext();
-        movie = await context.Movies.FirstOrDefaultAsync(m => m.Id == Id);
+        movie = await repo.GetAsync(Id);
         if (movie is null) NavigationManager.NotFound();
     }
+
     private async Task DeleteMovie() {
-        using var context = DbFactory.CreateDbContext();
-        context.Movies.Remove(movie!);
-        await context.SaveChangesAsync();
+        await repo.DeleteAsync(movie!.Id);
         NavigationManager.NavigateTo("/movies");
     }
 }
