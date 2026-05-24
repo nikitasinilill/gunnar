@@ -1,41 +1,20 @@
 @page "/countries"
 @attribute [ExcludeFromInteractiveRouting]
 @using Abc.Infra
-@using Microsoft.AspNetCore.Components.QuickGrid
 @using Abc.Data
-@using System.Linq
 @inject ICountriesRepo repo
 
-<PageTitle>Countries</PageTitle>
-
-<h1>Countries</h1>
-
-<p>
-    <a href="countries/create">Create New</a>
-</p>
-
-<QuickGrid Class="table" Items="Countries">
-    <PropertyColumn Property="country => country.Name" />
-    <PropertyColumn Property="country => country.Code" />
-    <PropertyColumn Property="country => country.Details" />
-    <PropertyColumn Property="country => country.IsoCode" />
-    <PropertyColumn Property="country => country.NativeName" />
-    <PropertyColumn Property="country => country.NumericCode" />
-    <PropertyColumn Property="country => country.OfficialName" />
-    <PropertyColumn Property="country => country.ValidFrom" />
-    <PropertyColumn Property="country => country.ValidTo" />
-
-    <TemplateColumn Context="country">
-        <a href="@($"countries/edit?id={country.Id}")">Edit</a> |
-        <a href="@($"countries/details?id={country.Id}")">Details</a> |
-        <a href="@($"countries/delete?id={country.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<MyIndexPage
+    TItem="Country"
+    PageTitleText="Countries Page"
+    EntityTitle="Countries"
+    Items="countries"
+    BasePath="/countries" />
 
 @code {
-    private IQueryable<Country> Countries = Enumerable.Empty<Country>().AsQueryable();
+    private IQueryable<Country> countries = Enumerable.Empty<Country>().AsQueryable();
 
     protected override async Task OnInitializedAsync() {
-        Countries = (await repo.GetAsync()).AsQueryable();
+        countries = (await repo.GetAsync()).AsQueryable();
     }
 }

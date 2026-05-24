@@ -5,35 +5,17 @@
 @inject ICountriesRepo repo
 @inject NavigationManager NavigationManager
 
-<PageTitle>Edit Country</PageTitle>
-
-<h1>Edit</h1>
-
-<h2>Country</h2>
-<hr />
-@if (country is null) {
-    <p><em>Loading...</em></p>
-} else {
-    <div class="row">
-        <div class="col-md-4">
-            <EditForm method="post" Model="country" OnValidSubmit="UpdateCountry" FormName="edit" Enhance>
-                <DataAnnotationsValidator />
-                <ValidationSummary role="alert"/>
-                <input type="hidden" name="country.Id" value="@country.Id" />
-                <MyEntityEditor Entity="country" />
-                <button type="submit" class="btn btn-primary">Save</button>
-            </EditForm>
-        </div>
-    </div>
-}
-
-<div>
-    <a href="/countries">Back to List</a>
-</div>
+<MyEditPage
+    PageTitleText="Edit Country"
+    EntityTitle="@country?.Name"
+    Entity="country"
+    BasePath="/countries"
+    EntityId="@Id"
+    OnValidSubmit="UpdateCountry" />
 
 @code {
     [SupplyParameterFromQuery] private Guid Id { get; set; }
-    [SupplyParameterFromForm] private Country country { get; set; }
+    [SupplyParameterFromForm(Name = nameof(Country))] private Country country { get; set; }
 
     protected override async Task OnInitializedAsync() {
         country ??= await repo.GetAsync(Id);

@@ -1,41 +1,20 @@
 @page "/movies"
 @attribute [ExcludeFromInteractiveRouting]
 @using Abc.Infra
-@using Microsoft.AspNetCore.Components.QuickGrid
-@using Microsoft.EntityFrameworkCore
 @using Abc.Data
-@implements IAsyncDisposable
-@inject IDbContextFactory<ApplicationDbContext> DbFactory
-@inject NavigationManager NavigationManager
+@inject IMoviesRepo repo
 
-<PageTitle>Index</PageTitle>
-
-<h1>Index</h1>
-
-<p>
-    <a href="movies/create">Create New</a>
-</p>
-
-<QuickGrid Class="table" Items="context.Movies">
-    <PropertyColumn Property="movie => movie.Name" />
-    <PropertyColumn Property="movie => movie.ValidFrom" />
-    <PropertyColumn Property="movie => movie.Genre" />
-    <PropertyColumn Property="movie => movie.Price" />
-
-    <TemplateColumn Context="movie">
-        <a href="@($"movies/edit?id={movie.Id}")">Edit</a> |
-        <a href="@($"movies/details?id={movie.Id}")">Details</a> |
-        <a href="@($"movies/delete?id={movie.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<MyIndexPage
+    TItem="Movie"
+    PageTitleText="Movies Page"
+    EntityTitle="Movies"
+    Items="movies"
+    BasePath="/movies" />
 
 @code {
-    private ApplicationDbContext context = default!;
+    private IQueryable<Movie> movies = Enumerable.Empty<Movie>().AsQueryable();
 
-    protected override void OnInitialized()
-    {
-        context = DbFactory.CreateDbContext();
+    protected override async Task OnInitializedAsync() {
+        movies = (await repo.GetAsync()).AsQueryable();
     }
-
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }

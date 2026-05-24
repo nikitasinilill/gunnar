@@ -1,44 +1,20 @@
 @page "/movies/create"
 @attribute [ExcludeFromInteractiveRouting]
 @using Abc.Infra
-@using Microsoft.EntityFrameworkCore
 @using Abc.Data
-@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject IMoviesRepo repo
 @inject NavigationManager NavigationManager
 
-<PageTitle>Create</PageTitle>
-
-<h1>Create</h1>
-
-<h2>Movie</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm method="post" Model="Movie" OnValidSubmit="AddMovie" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
-            <MyEntityEditor Entity="Movie" />
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
-    </div>
-</div>
-
-<div>
-    <a href="/movies">Back to List</a>
-</div>
+<MyCreatePage Entity="movie" EntityTitle="Movie" BasePath="/movies" OnValidSubmit="AddMovie" />
 
 @code {
-    [SupplyParameterFromForm]
-    private Movie Movie { get; set; } = default!;
+    [SupplyParameterFromForm(Name = nameof(Movie))]
+    private Movie movie { get; set; } = default!;
 
-    protected override void OnInitialized() => Movie ??= new();
+    protected override void OnInitialized() => movie ??= new();
 
-    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
-    private async Task AddMovie()
-    {
-        using var context = DbFactory.CreateDbContext();
-        context.Movies.Add(Movie);
-        await context.SaveChangesAsync();
+    private async Task AddMovie() {
+        await repo.CreateAsync(movie);
         NavigationManager.NavigateTo("/movies");
     }
 }

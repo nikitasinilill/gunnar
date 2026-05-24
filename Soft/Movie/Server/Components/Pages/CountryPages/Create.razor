@@ -5,29 +5,10 @@
 @inject ICountriesRepo repo
 @inject NavigationManager NavigationManager
 
-<PageTitle>Create Country</PageTitle>
-
-<h1>Create</h1>
-
-<h2>Country</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm method="post" Model="country" OnValidSubmit="AddCountry" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
-            <MyEntityEditor Entity="country" />
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
-    </div>
-</div>
-
-<div>
-    <a href="/countries">Back to List</a>
-</div>
+<MyCreatePage PageTitleText="Create Country" Entity="country" EntityTitle="Country" BasePath="/countries" OnValidSubmit="AddCountry" />
 
 @code {
-    [SupplyParameterFromForm] private Country country { get; set; } = default!;
+    [SupplyParameterFromForm(Name = nameof(Country))] private Country country { get; set; } = default!;
 
     protected override void OnInitialized() => country ??= new();
 
