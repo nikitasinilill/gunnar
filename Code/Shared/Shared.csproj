@@ -12,6 +12,7 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="10.0.3" />
     <ProjectReference Include="..\Jobs\Jobs.csproj" />
   </ItemGroup>
 

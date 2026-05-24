@@ -1,0 +1,20 @@
+﻿@using Abc.Data.Common
+
+@typeparam TItem where TItem : BaseEntity
+
+<PageTitle>@PageTitleText</PageTitle>
+
+<h1>@EntityTitle</h1>
+
+<p>
+    <a href="@($"{BasePath}/create")">Create New</a>
+</p>
+
+<MyEntitiesTable TEntity="TItem" Entities="Items" BasePath="@BasePath" />
+
+@code {
+    [Parameter] public string PageTitleText { get; set; } = "Index";
+    [Parameter] public string EntityTitle { get; set; } = string.Empty;
+    [Parameter] public IQueryable<TItem> Items { get; set; } = Enumerable.Empty<TItem>().AsQueryable();
+    [Parameter] public string BasePath { get; set; } = string.Empty;
+}

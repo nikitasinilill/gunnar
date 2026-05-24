@@ -18,8 +18,8 @@
 
 @code {
     [Parameter] public string PageTitleText { get; set; } = "Details";
-    [Parameter] public string EntityTitle { get; set; }
+    [Parameter] public string EntityTitle { get; set; } = string.Empty;
     [Parameter] public object Entity { get; set; }
-    [Parameter] public string BasePath { get; set; }
+    [Parameter] public string BasePath { get; set; } = string.Empty;
     [Parameter] public Guid? EntityId { get; set; }
 }
