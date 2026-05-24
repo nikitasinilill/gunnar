@@ -1,26 +1,51 @@
 @typeparam TValue
 
 <div class="mb-3">
-    <label for="@Id" class="form-label">@Label</label>
-    @if (IsString) {
-        <InputText id="@Id" class="form-control" Value="@StringValue" 
-           ValueChanged="@OnStringValueChanged" ValueExpression="@StringValueExpression" />
-    } else if (IsDate) {
-        <InputDate TValue="TValue" id="@Id" class="form-control" Value="@Value" 
-            ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" />
+    @if (Item is not null && hasProperty) {
+        <label for="@PropertyName" class="form-label">@inputLabel</label>
+        @if (hasEditor) {
+            <DynamicComponent Type="@editorType" Parameters="@editorParams" />
+            <DynamicComponent Type="@validationType" Parameters="@validationParams" />
+        }
     } else {
-        <InputNumber TValue="TValue" id="@Id" class="form-control" Value="@Value" 
+        <label for="@Id" class="form-label">@Label</label>
+    }
+
+    @if (Item is null && IsString) {
+        <InputText id="@Id" class="form-control" Value="@StringValue"
+           ValueChanged="@OnStringValueChanged" ValueExpression="@StringValueExpression" />
+    } else if (Item is null && IsDate) {
+        <InputDate TValue="TValue" id="@Id" class="form-control" Value="@Value"
+            ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" />
+    } else if (Item is null) {
+        <InputNumber TValue="TValue" id="@Id" class="form-control" Value="@Value"
             ValueChanged="@ValueChanged" ValueExpression="@ValueExpression" />
     }
-    <ValidationMessage For="@ValueExpression" class="text-danger" />
+    @if (Item is null) {
+        <ValidationMessage For="@ValueExpression" class="text-danger" />
+    }
 </div>
 
 @code {
+    [Parameter] public object Item { get; set; }
+    [Parameter] public string PropertyName { get; set; } = string.Empty;
     [Parameter] public string Id { get; set; } = string.Empty;
     [Parameter] public string Label { get; set; } = string.Empty;
     [Parameter] public TValue Value { get; set; }
     [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
     [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; }
+
+    protected override void OnParametersSet() => adapter = Item is null ? null : new EditorAdapter(this, Item, PropertyName);
+
+    private IEditorAdapter adapter;
+    private bool hasEditor => editorType is not null;
+    private bool hasProperty => adapter?.PropInfo is not null;
+    private string inputLabel => adapter?.DisplayName ?? string.Empty;
+    private Type editorType => adapter?.Editor;
+    private Type validationType => adapter?.Validator;
+    private IDictionary<string, object> editorParams => adapter?.EditorParams;
+    private IDictionary<string, object> validationParams => adapter?.ValidationParams;
+
     private static Type UnderlyingType => Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
     private static bool IsString => UnderlyingType == typeof(string);
     private static bool IsDate => UnderlyingType == typeof(DateTime) || UnderlyingType == typeof(DateOnly);
