@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(options =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString, x => x.MigrationsAssembly("Abc.Soft.Web")));
+    options.UseSqlite(connectionString));
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
