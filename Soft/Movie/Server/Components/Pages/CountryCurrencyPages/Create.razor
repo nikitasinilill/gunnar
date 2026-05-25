@@ -1,0 +1,19 @@
+@page "/countrycurrencies/create"
+@attribute [ExcludeFromInteractiveRouting]
+@using Abc.Data
+@using Abc.Infra
+@inject ICountryCurrenciesRepo repo
+@inject NavigationManager NavigationManager
+
+<MyCreatePage Entity="item" EntityTitle="Country Currency" BasePath="/countrycurrencies" OnValidSubmit="Add" />
+
+@code {
+    [SupplyParameterFromForm(Name = nameof(CountryCurrency))] private CountryCurrency item { get; set; } = default!;
+
+    protected override void OnInitialized() => item ??= new();
+
+    private async Task Add() {
+        await repo.CreateAsync(item);
+        NavigationManager.NavigateTo("/countrycurrencies");
+    }
+}
