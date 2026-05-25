@@ -9,12 +9,12 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
     where TContext : DbContext
     where TEntity : BaseEntity {
     protected readonly TContext db = c;
-    private IQueryable<TEntity> Set => db.Set<TEntity>();
+    protected virtual IQueryable<TEntity> Query() => db.Set<TEntity>();
     private static readonly BindingFlags Flags
         = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
 
     public async Task<int> CountAsync(Query query) {
-        return await AddSearch(Set, query ?? new Query()).CountAsync();
+        return await AddSearch(Query(), query ?? new Query()).CountAsync();
     }
 
     public async Task<TEntity> CreateAsync(TEntity e) {
@@ -26,7 +26,7 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
         return DeleteCoreAsync(id);
     }
     public async Task<TEntity> GetAsync(Guid id) {
-        return await Set.FirstOrDefaultAsync(x => x.Id == id);
+        return await Query().FirstOrDefaultAsync(x => x.Id == id);
     }
     public async Task<IEnumerable<TEntity>> GetAsync() {
         return await GetAllCoreAsync();
@@ -46,10 +46,10 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
         await db.SaveChangesAsync();
     }
     private async Task<IEnumerable<TEntity>> GetAllCoreAsync() {
-        return await Set.ToListAsync();
+        return await Query().ToListAsync();
     }
     private async Task<IEnumerable<TEntity>> GetPageCoreAsync(Query query) {
-        var result = AddSearch(Set, query);
+        var result = AddSearch(Query(), query);
         result = AddSort(result, query);
         result = AddPaging(result, query);
 

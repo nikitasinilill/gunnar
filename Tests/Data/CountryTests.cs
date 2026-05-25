@@ -8,5 +8,7 @@ namespace Abc.Tests.Data;
     [TestMethod] public void NumericCodeTest() => isProperty<string>(nameof(Country.NumericCode));
     [TestMethod] public void IsoCodeTest() => isProperty<string>(nameof(Country.IsoCode));
     [TestMethod] public void CurrenciesTest()
-        => isProperty<IEnumerable<CountryCurrency>>(nameof(Country.Currencies));
+        => isProperty<ICollection<Currency>>(nameof(Country.Currencies));
+    [TestMethod] public void CountryCurrenciesTest()
+        => isProperty<ICollection<CountryCurrency>>(nameof(Country.CountryCurrencies));
 }

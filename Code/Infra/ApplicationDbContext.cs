@@ -11,4 +11,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Currency> Currencies { get; set; } = default!;
     public DbSet<Money> Monies { get; set; } = default!;
     public DbSet<CountryCurrency> CountryCurrencies { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder builder) {
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    }
 }

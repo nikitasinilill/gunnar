@@ -10,5 +10,6 @@ public sealed class Country: NamedEntity {
      bool IsIsoCountry { get; set; }
      bool IsLoyaltyProgram { get; set; }
      [Random(4, 5, "KLMNOPQRS")] public string IsoCode { get; set; } = "";
-     public IEnumerable<CountryCurrency> Currencies { get; set; } = [];
+     public ICollection<CountryCurrency> CountryCurrencies { get; set; } = [];
+     public ICollection<Currency> Currencies => [.. CountryCurrencies.Select(x => x.Currency)];
 }

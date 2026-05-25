@@ -9,12 +9,17 @@ public sealed class SeedDb(ApplicationDbContext db, int recordCount = 20) {
         await db.Database.MigrateAsync();
 
         await SeedTable(db.Currencies, [nameof(Currency.Timestamp)]);
-        await SeedTable(db.Countries, [nameof(Country.Currencies), nameof(Country.Timestamp)]);
+        await SeedTable(db.Countries, [
+            nameof(Country.CountryCurrencies),
+            nameof(Country.Currencies),
+            nameof(Country.Timestamp)
+        ]);
         await SeedTable(db.Monies, [nameof(Money.CurrencyId), nameof(Money.Currency), nameof(Money.Timestamp)]);
         await SeedTable(db.CountryCurrencies, [
             nameof(CountryCurrency.CurrencyId),
             nameof(CountryCurrency.CountryId),
             nameof(CountryCurrency.Currency),
+            nameof(CountryCurrency.Country),
             nameof(CountryCurrency.Timestamp)
         ]);
         await SeedTable(db.Movies, [nameof(Movie.Country), nameof(Movie.Money), nameof(Movie.Timestamp)]);
