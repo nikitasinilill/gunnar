@@ -7,6 +7,12 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
     where TContext : DbContext
     where TEntity : BaseEntity {
     protected readonly TContext db = c;
+    private IQueryable<TEntity> Set => db.Set<TEntity>();
+
+    public async Task<int> CountAsync(Query query) {
+        return await Set.CountAsync();
+    }
+
     public async Task<TEntity> CreateAsync(TEntity e) {
         await db.AddAsync(e);
         await db.SaveChangesAsync();
@@ -16,10 +22,13 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
         return DeleteCoreAsync(id);
     }
     public async Task<TEntity> GetAsync(Guid id) {
-        return await db.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
+        return await Set.FirstOrDefaultAsync(x => x.Id == id);
     }
     public async Task<IEnumerable<TEntity>> GetAsync() {
         return await GetAllCoreAsync();
+    }
+    public async Task<IEnumerable<TEntity>> GetAsync(Query query) {
+        return await GetPageCoreAsync(query ?? new Query());
     }
     public async Task<TEntity> UpdateAsync(TEntity e) {
         db.Update(e);
@@ -33,6 +42,16 @@ public class EfBaseRepo<TContext, TEntity> (TContext c): IRepo<TEntity>
         await db.SaveChangesAsync();
     }
     private async Task<IEnumerable<TEntity>> GetAllCoreAsync() {
-        return await db.Set<TEntity>().ToListAsync();
+        return await Set.ToListAsync();
+    }
+    private async Task<IEnumerable<TEntity>> GetPageCoreAsync(Query query) {
+        var skip = (query.Page - 1) * query.PageSize;
+        var take = query.PageSize;
+        return await Set
+            .OrderBy(x => x.ValidTo)
+            .Skip(skip)
+            .Take(take)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
