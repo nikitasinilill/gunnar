@@ -1,46 +1,10 @@
-﻿@using Abc.Aids
-@using Abc.Data.Common
+﻿@using Abc.Data.Common
 @using Abc.Infra
 @using Abc.Shared.Code
-@using Microsoft.AspNetCore.Components.QuickGrid
-@using System.Collections
-@using System.Reflection
 
 @typeparam TEntity where TEntity : BaseEntity
 
-<QuickGrid Class="table myTable" Items="Entities">
-    @foreach (var property in typeof(TEntity).GetProperties().Where(Show)) {
-        <TemplateColumn>
-            <HeaderTemplate>
-                <div class="header-stack">
-                    <a href="@HeaderHref(property.Name)">@Iconed(property.Name)</a>
-                    <form method="get" action="@BasePath">
-                        <input type="hidden" name="@nameof(Query.Page)" value="1" />
-                        <input type="hidden" name="@nameof(Query.PageSize)" value="@query.PageSize" />
-                        <input type="hidden" name="@nameof(Query.SortBy)" value="@query.SortBy" />
-                        <input type="hidden" name="@nameof(Query.SortDir)" value="@query.SortDir" />
-                        <input type="hidden" name="@nameof(Query.SearchBy)" value="@property.Name" />
-                        <input type="search"
-                               class="form-control form-control-sm"
-                               name="@nameof(Query.SearchStr)"
-                               value="@SearchStr(property.Name)"
-                               disabled="@IsDisabled(property)"
-                               placeholder="Search..." />
-                    </form>
-                </div>
-            </HeaderTemplate>
-            <ChildContent Context="entity">
-                @Value(property, entity)
-            </ChildContent>
-        </TemplateColumn>
-    }
-    <TemplateColumn Context="entity">
-        <a href="@($"{BasePath}/edit?id={entity.Id}")">Edit</a> |
-        <a href="@($"{BasePath}/details?id={entity.Id}")">Details</a> |
-        <a href="@($"{BasePath}/delete?id={entity.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
-
+<MyQuickGrid TEntity="TEntity" Entities="@Entities" Query="@query" BasePath="@BasePath" />
 <MyTablePageNav Query="query" TotalCount="totalCount" CurrentUri="@navigation.Uri" />
 
 @code {
@@ -49,14 +13,8 @@
     private int totalCount;
 
     [Inject] private NavigationManager navigation { get; set; } = default!;
-    [Inject] private ApplicationDbContext db { get; set; } = default!;
     [Parameter] public IRepo<TEntity> Repo { get; set; } = default!;
     [Parameter] public string BasePath { get; set; } = string.Empty;
-
-    private string SortIcon => query?.SortDir == "asc" ? " ▲" : query?.SortDir == "desc" ? " ▼" : string.Empty;
-    private string Iconed(string name) => query?.SortBy == name ? name + SortIcon : name;
-    private string SearchStr(string name) => query?.SearchBy == name ? query.SearchStr : string.Empty;
-    private static bool IsDisabled(PropertyInfo property) => property?.PropertyType != typeof(string);
 
     protected override async Task OnInitializedAsync() {
         if (Repo is null) return;
@@ -66,61 +24,4 @@
         totalCount = await Repo.CountAsync(query);
         Entities = (await Repo.GetAsync(query)).AsQueryable();
     }
-
-    private string Value(PropertyInfo property, TEntity entity) {
-        var value = IsSelect(property)
-            ? SelectValue(property, entity)
-            : property.GetValue(entity);
-        return value?.ToString() ?? string.Empty;
-    }
-
-    private static bool IsSelect(PropertyInfo property)
-        => property?.GetCustomAttribute<SelectAttribute>() is not null;
-
-    private object SelectValue(PropertyInfo property, TEntity entity) {
-        var attribute = property?.GetCustomAttribute<SelectAttribute>();
-        var id = property?.GetValue(entity) as Guid?;
-        if (attribute?.EntityType is null || id is null) return null;
-
-        var selected = db.Find(attribute.EntityType, id.Value);
-        var displayProperty = selected?.GetType().GetProperty(attribute.DisplayProperty);
-        return displayProperty?.GetValue(selected);
-    }
-
-    private static bool Show(PropertyInfo property) {
-        if (property.Name == nameof(BaseEntity.Id)) return false;
-        var type = property.PropertyType;
-        if (type == typeof(string)) return true;
-        if (typeof(IEnumerable).IsAssignableFrom(type)) return false;
-        if (type.IsClass) return false;
-        return true;
-    }
-    private string HeaderHref(string name) {
-        var sortBy = query?.SortBy == name && query?.SortDir == "desc" ? null : name;
-        var sortDir = query?.SortBy == name ? "desc" : "asc";
-        var href = $"{BasePath}?Page=1&PageSize={query?.PageSize ?? Abc.Infra.Query.PageSizes[0]}";
-
-        if (!string.IsNullOrEmpty(query?.SearchStr)) {
-            href += $"&SearchBy={Encode(query.SearchBy)}&SearchStr={Encode(query.SearchStr)}";
-        }
-
-        return sortBy is null
-            ? href
-            : href + $"&SortBy={Encode(sortBy)}&SortDir={Encode(sortDir)}";
-    }
-    private static string Encode(string value) => Uri.EscapeDataString(value ?? string.Empty);
 }
-
-<style>
-    .myTable {
-        table-layout: fixed;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .myTable td {
-        white-space: normal;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-</style>

@@ -1,0 +1,49 @@
+@using Abc.Infra
+@using System.Reflection
+
+<div class="header-stack">
+    <a href="@HeaderHref">@Iconed</a>
+    <form method="get" action="@BasePath">
+        <input type="hidden" name="@nameof(Query.Page)" value="1" />
+        <input type="hidden" name="@nameof(Query.PageSize)" value="@Query.PageSize" />
+        <input type="hidden" name="@nameof(Query.SortBy)" value="@Query.SortBy" />
+        <input type="hidden" name="@nameof(Query.SortDir)" value="@Query.SortDir" />
+        <input type="hidden" name="@nameof(Query.SearchBy)" value="@Name" />
+        <input type="search"
+               class="form-control form-control-sm"
+               name="@nameof(Query.SearchStr)"
+               value="@SearchStr"
+               disabled="@IsDisabled"
+               placeholder="Search..." />
+    </form>
+</div>
+
+@code {
+    [Parameter] public Query Query { get; set; } = new();
+    [Parameter] public string BasePath { get; set; } = string.Empty;
+    [Parameter] public PropertyInfo PropertyInfo { get; set; } = default!;
+
+    private string Name => PropertyInfo?.Name ?? string.Empty;
+    private string SortIcon => Query?.SortDir == "asc" ? " ▲" : Query?.SortDir == "desc" ? " ▼" : string.Empty;
+    private string Iconed => Query?.SortBy == Name ? Name + SortIcon : Name;
+    private string SearchStr => Query?.SearchBy == Name ? Query.SearchStr : string.Empty;
+    private bool IsDisabled => PropertyInfo?.PropertyType != typeof(string);
+
+    private string HeaderHref {
+        get {
+            var sortBy = Query?.SortBy == Name && Query?.SortDir == "desc" ? null : Name;
+            var sortDir = Query?.SortBy == Name ? "desc" : "asc";
+            var href = $"{BasePath}?Page=1&PageSize={Query?.PageSize ?? Abc.Infra.Query.PageSizes[0]}";
+
+            if (!string.IsNullOrEmpty(Query?.SearchStr)) {
+                href += $"&SearchBy={Encode(Query.SearchBy)}&SearchStr={Encode(Query.SearchStr)}";
+            }
+
+            return sortBy is null
+                ? href
+                : href + $"&SortBy={Encode(sortBy)}&SortDir={Encode(sortDir)}";
+        }
+    }
+
+    private static string Encode(string value) => Uri.EscapeDataString(value ?? string.Empty);
+}

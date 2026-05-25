@@ -1,0 +1,11 @@
+@using Abc.Data.Common
+@typeparam TEntity where TEntity : BaseEntity
+
+<a href="@($"{BasePath}/edit?id={Item.Id}")">Edit</a> |
+<a href="@($"{BasePath}/details?id={Item.Id}")">Details</a> |
+<a href="@($"{BasePath}/delete?id={Item.Id}")">Delete</a>
+
+@code {
+    [Parameter] public TEntity Item { get; set; } = default!;
+    [Parameter] public string BasePath { get; set; } = string.Empty;
+}
