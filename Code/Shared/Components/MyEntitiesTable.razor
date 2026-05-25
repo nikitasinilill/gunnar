@@ -1,4 +1,5 @@
-﻿@using Abc.Data.Common
+﻿@using Abc.Aids
+@using Abc.Data.Common
 @using Abc.Infra
 @using Abc.Shared.Code
 @using Microsoft.AspNetCore.Components.QuickGrid
@@ -48,6 +49,7 @@
     private int totalCount;
 
     [Inject] private NavigationManager navigation { get; set; } = default!;
+    [Inject] private ApplicationDbContext db { get; set; } = default!;
     [Parameter] public IRepo<TEntity> Repo { get; set; } = default!;
     [Parameter] public string BasePath { get; set; } = string.Empty;
 
@@ -65,9 +67,24 @@
         Entities = (await Repo.GetAsync(query)).AsQueryable();
     }
 
-    private static string Value(PropertyInfo property, TEntity entity) {
-        var value = property.GetValue(entity);
+    private string Value(PropertyInfo property, TEntity entity) {
+        var value = IsSelect(property)
+            ? SelectValue(property, entity)
+            : property.GetValue(entity);
         return value?.ToString() ?? string.Empty;
+    }
+
+    private static bool IsSelect(PropertyInfo property)
+        => property?.GetCustomAttribute<SelectAttribute>() is not null;
+
+    private object SelectValue(PropertyInfo property, TEntity entity) {
+        var attribute = property?.GetCustomAttribute<SelectAttribute>();
+        var id = property?.GetValue(entity) as Guid?;
+        if (attribute?.EntityType is null || id is null) return null;
+
+        var selected = db.Find(attribute.EntityType, id.Value);
+        var displayProperty = selected?.GetType().GetProperty(attribute.DisplayProperty);
+        return displayProperty?.GetValue(selected);
     }
 
     private static bool Show(PropertyInfo property) {

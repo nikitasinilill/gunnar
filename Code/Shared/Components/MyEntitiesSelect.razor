@@ -1,0 +1,64 @@
+@using Abc.Data.Common
+@using Abc.Infra
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using System.Linq.Expressions
+@using System.Reflection
+
+<InputSelect TValue="Guid?"
+             @attributes="Attributes"
+             Value="@Value"
+             ValueChanged="@ValueChanged"
+             ValueExpression="@ValueExpression">
+    <option value="">-- select --</option>
+    @foreach (var option in options) {
+        <option value="@option.Id">@option.Text</option>
+    }
+</InputSelect>
+
+@code {
+    [Inject] private ApplicationDbContext db { get; set; } = default!;
+
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> Attributes { get; set; }
+    [Parameter] public Guid? Value { get; set; }
+    [Parameter] public EventCallback<Guid?> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<Guid?>> ValueExpression { get; set; } = default!;
+    [Parameter] public Type EntityType { get; set; } = default!;
+    [Parameter] public string DisplayProperty { get; set; } = "Name";
+
+    private IReadOnlyList<OptionItem> options = [];
+
+    protected override async Task OnParametersSetAsync() {
+        options = await LoadOptions();
+    }
+
+    private Task<IReadOnlyList<OptionItem>> LoadOptions() {
+        if (EntityType is null) return Task.FromResult<IReadOnlyList<OptionItem>>([]);
+
+        var method = GetType().GetMethod(
+            nameof(LoadOptionsGeneric),
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        if (method is null) return Task.FromResult<IReadOnlyList<OptionItem>>([]);
+
+        return (Task<IReadOnlyList<OptionItem>>) method.MakeGenericMethod(EntityType).Invoke(this, null)!;
+    }
+
+    private async Task<IReadOnlyList<OptionItem>> LoadOptionsGeneric<TEntity>() where TEntity : BaseEntity {
+        var entities = await db.Set<TEntity>().AsNoTracking().ToListAsync();
+        return entities
+            .Select(entity => new OptionItem(entity.Id, DisplayText(entity)))
+            .OrderBy(option => option.Text)
+            .ToList();
+    }
+
+    private string DisplayText(BaseEntity entity) {
+        var type = entity.GetType();
+        var property = type.GetProperty(DisplayProperty)
+            ?? type.GetProperty("Name")
+            ?? type.GetProperty("Code");
+        var value = property?.GetValue(entity)?.ToString();
+        return string.IsNullOrWhiteSpace(value) ? entity.Id.ToString() : value;
+    }
+
+    private sealed record OptionItem(Guid Id, string Text);
+}
