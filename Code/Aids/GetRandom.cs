@@ -57,27 +57,32 @@ public static class GetRandom {
     }
     public static bool Bool() => r.Next(2) == 0;
     public static char Char(char min = char.MinValue, char max = char.MaxValue) => (char) UInt16(min, max);
-    public static string String(byte minLength = byte.MinValue, byte maxLength = (byte) sbyte.MaxValue) {
+    public static string String(byte minLength = byte.MinValue, byte maxLength = (byte) sbyte.MaxValue, string chars = null) {
         var len = UInt8(minLength, maxLength);
         var s = new char[len];
-        for (var i = 0; i < len; i++) s[i] = Char('a', 'z');
+        for (var i = 0; i < len; i++) s[i] = chars is null ? Char('a', 'z') : chars[UInt8(0, (byte) chars.Length)];
         return new string(s);
     }
-    public static object Object(Type t) {
+    public static object Object(Type t, string[] exclude = null) {
+        exclude ??= [];
         var x = Nullable.GetUnderlyingType(t);
         if (x is not null) t = x;
         var o = Activator.CreateInstance(t);
         foreach (var p in t.GetProperties()) {
             if (!p.CanWrite) continue;
             if (p.PropertyType.IsArray) continue;
-            var v = isClass(p) ? Object(p.PropertyType): Value(p.PropertyType);
+            if (exclude.Contains(p.Name)) continue;
+            var randomAttribute = p.GetCustomAttribute<RandomAttribute>();
+            var v = randomAttribute is not null
+                ? randomAttribute.CreateValue(p.PropertyType)
+                : isClass(p) ? Object(p.PropertyType) : Value(p.PropertyType);
             p.SetValue(o, v);
         }
         return o;
     }
     private static bool isClass(PropertyInfo p)
         => p.PropertyType.IsClass && p.PropertyType != typeof(string);
-    private static object Value(Type t) {
+    public static object Value(Type t) {
         var x = Nullable.GetUnderlyingType(t);
         if (x is not null) t = x;
         if (t == typeof(string)) return String();

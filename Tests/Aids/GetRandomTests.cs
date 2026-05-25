@@ -44,6 +44,9 @@ public sealed class GetRandomTests {
     public void StringTest()
         => Assert.AreNotEqual(GetRandom.String(0, (byte)max), GetRandom.String(0, (byte)max));
     [TestMethod]
+    public void StringWithCharsTest()
+        => Assert.AreEqual("AAAAA", GetRandom.String(5, 5, "A"));
+    [TestMethod]
     public void CharTest()
         => Assert.AreNotEqual(GetRandom.Char((char)0, (char)max), GetRandom.Char((char)0, (char)max));
     [TestMethod]
@@ -79,5 +82,22 @@ public sealed class GetRandomTests {
             if (p.PropertyType.IsArray) continue;
             Assert.AreNotEqual(p.GetValue(o1), p.GetValue(o2));
         }
+    }
+    private sealed class attributedClass {
+        [Random(3, 3, "A")] public string Code { get; set; }
+        [Random(7, 7)] public int Count { get; set; }
+        [Random(2, 2, 1)] public decimal Price { get; set; }
+        [Random(-3, -1)] public DateTime? ValidFrom { get; set; }
+        public string Excluded { get; set; } = "kept";
+    }
+    [TestMethod]
+    public void ObjectWithRandomAttributeTest() {
+        var o = (attributedClass) GetRandom.Object(typeof(attributedClass), [nameof(attributedClass.Excluded)]);
+        Assert.AreEqual("AAA", o.Code);
+        Assert.AreEqual(7, o.Count);
+        Assert.AreEqual(2M, o.Price);
+        Assert.AreEqual("kept", o.Excluded);
+        Assert.IsTrue(o.ValidFrom <= DateTime.Now.AddYears(-1));
+        Assert.IsTrue(o.ValidFrom >= DateTime.Now.AddYears(-4));
     }
 }
