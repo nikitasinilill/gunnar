@@ -7,6 +7,10 @@ public sealed class Query(Dictionary<string, string> values = null) {
     public static int[] PageSizes => [7, 15, 25, 50, 100];
     public int Page => ToInt(Get(nameof(Page)), 1);
     public int PageSize => ToInt(Get(nameof(PageSize)), PageSizes[0]);
+    public string SortBy => Get(nameof(SortBy));
+    public string SortDir => Get(nameof(SortDir));
+    public string SearchBy => Get(nameof(SearchBy));
+    public string SearchStr => Get(nameof(SearchStr));
 
     private string Get(string name) => (values ?? []).TryGetValue(name, out var value) ? value : null;
     private static int ToInt(string value, int defaultValue)

@@ -20,7 +20,7 @@
     }
 
     <span>Total: @TotalCount Rows:</span>
-    @foreach (var size in Query.PageSizes) {
+    @foreach (var size in Abc.Infra.Query.PageSizes) {
         if (size == PageSize) {
             <span>@size</span>
         } else {
@@ -36,7 +36,13 @@
 
     private string BaseUri => (CurrentUri ?? string.Empty).Split('?', 2)[0];
     private int PageNo => Query?.Page ?? 1;
-    private int PageSize => Query?.PageSize ?? Query.PageSizes[0];
+    private int PageSize => Query?.PageSize ?? Abc.Infra.Query.PageSizes[0];
+    private string SortQuery => string.IsNullOrEmpty(Query?.SortBy)
+        ? string.Empty
+        : $"&SortBy={Encode(Query.SortBy)}&SortDir={Encode(Query.SortDir)}";
+    private string SearchQuery => string.IsNullOrEmpty(Query?.SearchStr)
+        ? string.Empty
+        : $"&SearchBy={Encode(Query.SearchBy)}&SearchStr={Encode(Query.SearchStr)}";
     private int TotalPages {
         get {
             if (PageSize <= 0) return 1;
@@ -47,9 +53,10 @@
     }
     private bool IsFirstPage => PageNo <= 1;
     private bool IsLastPage => PageNo >= TotalPages;
-    private string FirstHref => $"{BaseUri}?Page=1&PageSize={PageSize}";
-    private string PrevHref => $"{BaseUri}?Page={Math.Max(1, PageNo - 1)}&PageSize={PageSize}";
-    private string NextHref => $"{BaseUri}?Page={Math.Min(TotalPages, PageNo + 1)}&PageSize={PageSize}";
-    private string LastHref => $"{BaseUri}?Page={TotalPages}&PageSize={PageSize}";
-    private string SizeHref(int size) => $"{BaseUri}?Page=1&PageSize={size}";
+    private string FirstHref => $"{BaseUri}?Page=1&PageSize={PageSize}{SortQuery}{SearchQuery}";
+    private string PrevHref => $"{BaseUri}?Page={Math.Max(1, PageNo - 1)}&PageSize={PageSize}{SortQuery}{SearchQuery}";
+    private string NextHref => $"{BaseUri}?Page={Math.Min(TotalPages, PageNo + 1)}&PageSize={PageSize}{SortQuery}{SearchQuery}";
+    private string LastHref => $"{BaseUri}?Page={TotalPages}&PageSize={PageSize}{SortQuery}{SearchQuery}";
+    private string SizeHref(int size) => $"{BaseUri}?Page=1&PageSize={size}{SortQuery}{SearchQuery}";
+    private static string Encode(string value) => Uri.EscapeDataString(value ?? string.Empty);
 }
