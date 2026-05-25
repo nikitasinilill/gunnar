@@ -8,13 +8,7 @@
     TItem="Money"
     PageTitleText="Monies Index"
     EntityTitle="Monies"
-    Items="monies"
+    Repo="repo"
     BasePath="/monies" />
 
-@code {
-    private IQueryable<Money> monies = Enumerable.Empty<Money>().AsQueryable();
-
-    protected override async Task OnInitializedAsync() {
-        monies = (await repo.GetAsync()).AsQueryable();
-    }
-}
+@code { }

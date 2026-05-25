@@ -1,4 +1,6 @@
 ﻿@using Abc.Data.Common
+@using Abc.Infra
+@using Abc.Shared.Code
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using System.Collections
 @using System.Reflection
@@ -18,9 +20,25 @@
     </TemplateColumn>
 </QuickGrid>
 
+<MyTablePageNav Query="query" TotalCount="totalCount" CurrentUri="@navigation.Uri" />
+
 @code {
-    [Parameter] public IQueryable<TEntity> Entities { get; set; } = Enumerable.Empty<TEntity>().AsQueryable();
+    private IQueryable<TEntity> Entities { get; set; } = Enumerable.Empty<TEntity>().AsQueryable();
+    private Query query = new();
+    private int totalCount;
+
+    [Inject] private NavigationManager navigation { get; set; } = default!;
+    [Parameter] public IRepo<TEntity> Repo { get; set; } = default!;
     [Parameter] public string BasePath { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync() {
+        if (Repo is null) return;
+
+        var uri = navigation.ToAbsoluteUri(navigation.Uri);
+        query = new UrlParams(uri).Parse();
+        totalCount = await Repo.CountAsync(query);
+        Entities = (await Repo.GetAsync(query)).AsQueryable();
+    }
 
     private static string Value(PropertyInfo property, TEntity entity) {
         var value = property.GetValue(entity);

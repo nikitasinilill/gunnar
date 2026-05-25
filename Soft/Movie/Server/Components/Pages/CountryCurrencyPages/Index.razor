@@ -8,13 +8,7 @@
     TItem="CountryCurrency"
     PageTitleText="Country Currencies Page"
     EntityTitle="Country Currencies"
-    Items="items"
+    Repo="repo"
     BasePath="/countrycurrencies" />
 
-@code {
-    private IQueryable<CountryCurrency> items = Enumerable.Empty<CountryCurrency>().AsQueryable();
-
-    protected override async Task OnInitializedAsync() {
-        items = (await repo.GetAsync()).AsQueryable();
-    }
-}
+@code { }

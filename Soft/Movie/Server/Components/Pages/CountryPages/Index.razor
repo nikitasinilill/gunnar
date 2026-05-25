@@ -8,13 +8,7 @@
     TItem="Country"
     PageTitleText="Countries Page"
     EntityTitle="Countries"
-    Items="countries"
+    Repo="repo"
     BasePath="/countries" />
 
-@code {
-    private IQueryable<Country> countries = Enumerable.Empty<Country>().AsQueryable();
-
-    protected override async Task OnInitializedAsync() {
-        countries = (await repo.GetAsync()).AsQueryable();
-    }
-}
+@code { }

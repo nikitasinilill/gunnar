@@ -8,13 +8,7 @@
     TItem="Movie"
     PageTitleText="Movies Page"
     EntityTitle="Movies"
-    Items="movies"
+    Repo="repo"
     BasePath="/movies" />
 
-@code {
-    private IQueryable<Movie> movies = Enumerable.Empty<Movie>().AsQueryable();
-
-    protected override async Task OnInitializedAsync() {
-        movies = (await repo.GetAsync()).AsQueryable();
-    }
-}
+@code { }
