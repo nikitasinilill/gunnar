@@ -8,17 +8,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Abc.Soft.Web.Migrations
+namespace Abc.Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260308122747_v.08.03.26-Movies")]
-    partial class v080326Movies
+    [Migration("20260525073830_v.25.05.26-MonetaryTables")]
+    partial class v250526MonetaryTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
 
             modelBuilder.Entity("Abc.Data.Country", b =>
                 {
@@ -63,7 +63,42 @@ namespace Abc.Soft.Web.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Abc.Data.Movie", b =>
+            modelBuilder.Entity("Abc.Data.CountryCurrency", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CurrencyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("BLOB");
+
+                    b.Property<DateTime?>("ValidFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.ToTable("CountryCurrencies");
+                });
+
+            modelBuilder.Entity("Abc.Data.Currency", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +110,89 @@ namespace Abc.Soft.Web.Migrations
                     b.Property<string>("Details")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsIsoCurrency")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MajorUnitSymbol")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MinorUnitSymbol")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NumericCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("RatioOfMinorUnit")
+                        .HasColumnType("REAL");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("BLOB");
+
+                    b.Property<DateTime?>("ValidFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currencies");
+                });
+
+            modelBuilder.Entity("Abc.Data.Money", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CurrencyId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("BLOB");
+
+                    b.Property<DateTime?>("ValidFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ValidTo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.ToTable("Monies");
+                });
+
+            modelBuilder.Entity("Abc.Data.Movie", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Genre")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("MoneyId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -96,6 +213,10 @@ namespace Abc.Soft.Web.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("MoneyId");
 
                     b.ToTable("Movies");
                 });
@@ -314,6 +435,43 @@ namespace Abc.Soft.Web.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Abc.Data.CountryCurrency", b =>
+                {
+                    b.HasOne("Abc.Data.Country", null)
+                        .WithMany("Currencies")
+                        .HasForeignKey("CountryId");
+
+                    b.HasOne("Abc.Data.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId");
+
+                    b.Navigation("Currency");
+                });
+
+            modelBuilder.Entity("Abc.Data.Money", b =>
+                {
+                    b.HasOne("Abc.Data.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId");
+
+                    b.Navigation("Currency");
+                });
+
+            modelBuilder.Entity("Abc.Data.Movie", b =>
+                {
+                    b.HasOne("Abc.Data.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
+                    b.HasOne("Abc.Data.Money", "Money")
+                        .WithMany()
+                        .HasForeignKey("MoneyId");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Money");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -414,6 +572,11 @@ namespace Abc.Soft.Web.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Abc.Data.Country", b =>
+                {
+                    b.Navigation("Currencies");
                 });
 #pragma warning restore 612, 618
         }

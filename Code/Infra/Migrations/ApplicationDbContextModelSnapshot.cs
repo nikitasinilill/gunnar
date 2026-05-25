@@ -15,7 +15,7 @@ namespace Abc.Infra.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.8");
 
             modelBuilder.Entity("Abc.Data.Country", b =>
                 {
@@ -66,10 +66,10 @@ namespace Abc.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CountryId")
+                    b.Property<Guid?>("CountryId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CurrencyId")
+                    b.Property<Guid?>("CurrencyId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Details")
@@ -92,7 +92,7 @@ namespace Abc.Infra.Migrations
 
                     b.HasIndex("CurrencyId");
 
-                    b.ToTable("CountryCurrency");
+                    b.ToTable("CountryCurrencies");
                 });
 
             modelBuilder.Entity("Abc.Data.Currency", b =>
@@ -150,7 +150,7 @@ namespace Abc.Infra.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CurrencyId")
+                    b.Property<Guid?>("CurrencyId")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Timestamp")
@@ -168,7 +168,7 @@ namespace Abc.Infra.Migrations
 
                     b.HasIndex("CurrencyId");
 
-                    b.ToTable("Money");
+                    b.ToTable("Monies");
                 });
 
             modelBuilder.Entity("Abc.Data.Movie", b =>
@@ -436,15 +436,11 @@ namespace Abc.Infra.Migrations
                 {
                     b.HasOne("Abc.Data.Country", null)
                         .WithMany("Currencies")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryId");
 
                     b.HasOne("Abc.Data.Currency", "Currency")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CurrencyId");
 
                     b.Navigation("Currency");
                 });
@@ -453,9 +449,7 @@ namespace Abc.Infra.Migrations
                 {
                     b.HasOne("Abc.Data.Currency", "Currency")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CurrencyId");
 
                     b.Navigation("Currency");
                 });
